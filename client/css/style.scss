@@ -30,12 +30,12 @@ body{
                 }
                 input#my-input {
                     background-image: url("lupa.png");
-                    background-size: 27px;
+                    background-size: 25px;
                     background-repeat: no-repeat;
                     text-indent: 35px;
                     transition:0.1s;
-                    background-position-x: 13px;
-                    background-position-y: 9px;
+                    background-position-x: 14px;
+                    background-position-y: 10px;
                 }
                 input#my-input:focus {
                     background-image: none;
@@ -84,8 +84,9 @@ body{
                 }
                 .movie{
                     background-color: rgb(56, 56, 56);
-                    height: 480px;
-                    width: 290px;
+                    /*height: auto;*/
+                    height: 430px;
+                    width: 280px;
                     cursor: pointer;
                     border-radius: 4px;
                     .movie-title{
@@ -93,7 +94,7 @@ body{
                         font-weight: bolder;
                         font-size: 200%;
                         font-family: Arial, Helvetica, sans-serif;
-                        color: rgb(218, 204, 204);
+                        color: rgb(255, 255, 255);
                     }
                     .image{
                         padding: 20px 20px 10px 20px;
@@ -102,13 +103,11 @@ body{
                         padding: 10px 20px 10px 20px;
                         color: white;
                         font-size: larger;
+                        font-family: Calibri, Helvetica, sans-serif;
+                        display: grid;
+                        grid-template-columns: 120px auto;
                         .main-text{
-                            float: left;
                             font-weight: bolder;
-
-                        }
-                        .text{
-                            
                         }
                     }
                 }
