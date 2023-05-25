@@ -13,17 +13,17 @@ function App() {
 
       setMovies(jsonData);
 
-      console.log(movies)
+      console.log(jsonData)
     } catch (error) {
         console.error(error.message);
     }
    
   }
 
-  useEffect( async () => {
+  useEffect(() => {
     // Update the document title using the browser API
-    getMovies();
-    await console.log(movies)
+     getMovies();
+
   },[]);
 
 
