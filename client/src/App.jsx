@@ -1,21 +1,32 @@
 import './css/style.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
 
   const [movies, setMovies] = useState(0);
 
+
   const getMovies = async () => {
     try {
-      const response = await fetch("http//:localhost:5000/movies");
+      const response = await fetch("http://localhost:5000/movies");
       const jsonData = await response.json();
 
       setMovies(jsonData);
+
+      console.log(movies)
     } catch (error) {
         console.error(error.message);
     }
    
   }
+
+  useEffect( async () => {
+    // Update the document title using the browser API
+    getMovies();
+    await console.log(movies)
+  },[]);
+
+
   return (
     <>
     <header>
