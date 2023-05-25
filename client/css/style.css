@@ -89,4 +89,13 @@ body main .flex-container .movie-card .movie .info {
 body main .flex-container .movie-card .movie .info .main-text {
   float: left;
   font-weight: bolder;
+}
+body footer {
+  background-color: black;
+  color: aliceblue;
+  text-align: center;
+  font-size: 140%;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  height: 45px;
+  padding-top: 12px;
 }/*# sourceMappingURL=style.css.map */
