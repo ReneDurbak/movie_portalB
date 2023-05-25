@@ -6,18 +6,21 @@ const cors = require("cors")
 app.use(cors())
 app.use(express.json())
 
-//creat
+//create -> done
 app.post("/movies", async(req,res)=>{
     try {
+
         const {genre_id, title_movie, year, summary, imageurl} = req.body;
-        const newMovie = await db.query("INSERT INTO movies (genre_id) VALUES($1) (title_movie) VALUES($2) (year) VALUES($3) (summary) VALUES($4) (imageurl) VALUES($5) RETURNING *",[genre_id, title_movie, year, summary, imageurl]);
+        var genre = await pool.query("SELECT title_genre FROM genre WHERE genre_id = $1", [genre_id])
+        genre = genre.rows[0].title_genre;
+        const newMovie = await pool.query("INSERT INTO movies (genre_id, title_genre, title_movie, year, summary, imageurl) VALUES($1,$2,$3,$4,$5, $6) RETURNING *",[genre_id,genre, title_movie, year, summary, imageurl]);
         res.json(newMovie.rows[0]);
     } catch (error) {
         console.error(error.message);
     }
 })
 
-//get all movies
+//get all movies -> done
 app.get("/movies", async(req,res)=>{
     try {
         const allMoview = await db.query("SELECT * FROM movies");
@@ -28,7 +31,7 @@ app.get("/movies", async(req,res)=>{
     }
 })
 
-// get concrete movie
+// get concrete movie -> done
 app.get("/movies/:id", async(req,res)=>{
     try {
         const {id} = req.params;
@@ -39,13 +42,16 @@ app.get("/movies/:id", async(req,res)=>{
     }
 })
 
-// update concrete movie
+// update concrete movie -> done
 // 
 app.put("/movies/:id", async(req,res)=>{
     try {
         const {id} = req.params;
-        const {genre_id, title_movie, year, summary, image_url} = req.body;
-        const update =  await db.query("UPDATE movies SET genre_id = $1, title_movie = $2, year = $3, summary = $4, image_url = $5  WHERE movie_id = $6",[genre_id, title_movie, year, summary, image_url, id]);
+        const {genre_id, title_movie, year, summary, imageurl} = req.body;
+        var genre = await pool.query("SELECT title_genre FROM genre WHERE genre_id = $1", [genre_id]);
+        genre = genre.rows[0].title_genre;
+        console.log(genre);
+        const update =  await pool.query("UPDATE movies SET genre_id = $1, title_genre = $2, title_movie = $3, year = $4, summary = $5, imageurl = $6  WHERE movie_id = $7",[genre_id,genre, title_movie, year, summary, imageurl, id]);
         res.json("[database updated -> record updated]");
     } catch (error) {
         console.error(error.message);
@@ -53,7 +59,7 @@ app.put("/movies/:id", async(req,res)=>{
 })
 
 
-//delete conrete movie
+//delete conrete movie -> done
 app.delete("/movies/:id", async(req,res)=>{
     try {
         const {id} = req.params;
