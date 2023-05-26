@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function MovieTab() { 
+async function MovieTab() { 
     //console.log(dataMovies)
 
 
@@ -22,32 +22,16 @@ function MovieTab() {
     
       },[]);
 
-const a = getMovies()
-a.then(movies=>{
-    console.log(movies)
 
-    movies.forEach(element => {
-        console.log(element)
+   const movies = await getMovies()
 
-        return(
-        <>
-        
-
-        </>
-    );
-    });
-})
-
-
-
-   
+   movies.forEach(m => {
+        console.log(m)
+   });
     
-}
 
-export default MovieTab;
 
 /*
-        
     return <div key={id} className="flex-container">
             <div className="movie-card">
                 <p className="rating">80%</p>
@@ -62,3 +46,6 @@ export default MovieTab;
             </div>
         </div>
 */
+}
+
+export default MovieTab;
