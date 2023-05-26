@@ -16,7 +16,7 @@ app.post("/movies", async(req,res)=>{
         const newMovie = await pool.query("INSERT INTO movies (genre_id, title_genre, title_movie, year, summary, imageurl) VALUES($1,$2,$3,$4,$5, $6) RETURNING *",[genre_id,genre, title_movie, year, summary, imageurl]);
         res.json(newMovie.rows[0]);
     } catch (error) {
-        console.error(error.message);
+        res.status(500).json({message: `${error.message}`});
     }
 })
 
@@ -26,7 +26,7 @@ app.get("/movies", async(req,res)=>{
         const allMoview = await db.query("SELECT * FROM movies");
         res.json(allMoview.rows);
     } catch (error) {
-        res.json(`Error has occurred: ${error}`)
+        res.status(500).json({message: `${error.message}`});
     }
 })
 
@@ -37,7 +37,7 @@ app.get("/movies/:id", async(req,res)=>{
         const movie = await db.query("SELECT * FROM movies WHERE movie_id = $1", [id]);
         res.json(movie.rows[0]);
     } catch (error) {
-        console.error(error.message);
+        res.status(500).json({message: `${error.message}`});
     }
 })
 
@@ -53,7 +53,7 @@ app.put("/movies/:id", async(req,res)=>{
         const update =  await pool.query("UPDATE movies SET genre_id = $1, title_genre = $2, title_movie = $3, year = $4, summary = $5, imageurl = $6  WHERE movie_id = $7",[genre_id,genre, title_movie, year, summary, imageurl, id]);
         res.json("[database updated -> record updated]");
     } catch (error) {
-        console.error(error.message);
+        res.status(500).json({message: `${error.message}`});
     }
 })
 
@@ -65,7 +65,7 @@ app.delete("/movies/:id", async(req,res)=>{
         const update =  await db.query("DELETE FROM movies WHERE movie_id = $1",[id]);
         res.json("[database updated -> record deleted]");
     } catch (error) {
-        console.error(error.message);
+        res.status(500).json({message: `${error.message}`});
     }
 })
 
