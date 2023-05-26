@@ -1,51 +1,52 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-async function MovieTab() { 
-    //console.log(dataMovies)
+const MovieComponent = () => {
+  const [movies, setMovies] = useState([]);
 
+  useEffect(() => {
+    getMovies()
+      .then(movies => {
+        setMovies(movies);
+      })
+      .catch(error => {
+        console.error('Error fetching movies:', error);
+      });
+  }, []);
 
-    const getMovies = async () => {
-        try {
-          const response = await fetch("http://localhost:5000/movies");
-          const jsonData = await response.json();
+  const getMovies = async () => {
+    try {
+      // Fetch movies from an API or any other data source
+      const response = await fetch('http://localhost:5000/movies');
+      const data = await response.json();
+      return data; // Assuming the response contains a "movies" property with the list of movies
+    } catch (error) {
+      throw new Error('Failed to fetch movies');
+    }
+  };
 
-          return jsonData
-        } catch (error) {
-            console.error(error.message);
-        }
-       
-      }
-    
-      useEffect(() => {
-        // Update the document title using the browser API
-         getMovies();
-    
-      },[]);
-
-
-   const movies = await getMovies()
-
-   movies.forEach(m => {
-        console.log(m)
-   });
-    
-
-
-/*
-    return <div key={id} className="flex-container">
-            <div className="movie-card">
-                <p className="rating">80%</p>
-                <div className="movie">
-                    <div className="image"><img src={data.imageurl} alt="Deadpool poster" height="290px" width="240px"></img></div>
-                    <div className="movie-title">{data.title_movie}</div>
-                    <div className="info">
-                        <div className="main-text">Release year:</div><div className="text">{data.year}</div>
-                        <div className="main-text">Genre:</div><div className="text">{data.title_genre}</div>
-                    </div>
-                </div>
+  return (
+    <>
+      {movies.map(movie => (
+        <div className="flex-container" key={movie.movie_id}>
+          <div className="movie-card">
+            <p className="rating">80%</p>
+            <div className="movie">
+              <div className="image">
+                <img src={movie.imageurl} alt="Deadpool poster" height="290px" width="240px" />
+              </div>
+              <div className="movie-title">{movie.title_movie}</div>
+              <div className="info">
+                <div className="main-text">Release year:</div>
+                <div className="text">{movie.year}</div>
+                <div className="main-text">Genre:</div>
+                <div className="text">{movie.title_genre}</div>
+              </div>
             </div>
+          </div>
         </div>
-*/
-}
+      ))}
+    </>
+  );
+};
 
-export default MovieTab;
+export default MovieComponent;

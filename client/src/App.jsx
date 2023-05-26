@@ -1,15 +1,9 @@
 import './css/style.css';
-import MovieTab from '../components/movieTab';
 
 //components
+import MovieTab from '../components/MovieTab.jsx';
 
-function App() {
-
-  //const [movies, setMovies] = useState(0);
-
-
-
- 
+ function App() {
 
   //console.log(getMovies())
 
