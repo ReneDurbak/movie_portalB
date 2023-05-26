@@ -1,30 +1,17 @@
 import './css/style.css';
-import { useState, useEffect } from 'react';
+import MovieTab from '../components/movieTab';
+
+//components
 
 function App() {
 
-  const [movies, setMovies] = useState(0);
+  //const [movies, setMovies] = useState(0);
 
 
-  const getMovies = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/movies");
-      const jsonData = await response.json();
 
-      setMovies(jsonData);
+ 
 
-      console.log(jsonData)
-    } catch (error) {
-        console.error(error.message);
-    }
-   
-  }
-
-  useEffect(() => {
-    // Update the document title using the browser API
-     getMovies();
-
-  },[]);
+  //console.log(getMovies())
 
 
   return (
@@ -76,19 +63,7 @@ function App() {
         </div>
     </header>
     <main>
-        <div className="flex-container">
-            <div className="movie-card">
-                <p className="rating">80%</p>
-                <div className="movie">
-                    <div className="image"><img src="https://image.tmdb.org/t/p/original/swS3PsQYD3wGEWZwtgpUlGRMv1G.jpg" alt="Deadpool poster" height="290px" width="240px"></img></div>
-                    <div className="movie-title">Deadpool</div>
-                    <div className="info">
-                        <div className="main-text">Release year:</div><div className="text">2016</div>
-                        <div className="main-text">Genre:</div><div className="text">Action</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <MovieTab />
     </main>
     <footer>
         Made by Team B &copy;2023
@@ -97,3 +72,4 @@ function App() {
   )
 }
 export default App;
+

@@ -26,7 +26,6 @@ app.get("/movies", async(req,res)=>{
         const allMoview = await db.query("SELECT * FROM movies");
         res.json(allMoview.rows);
     } catch (error) {
-        console.error(error.message);
         res.json(`Error has occurred: ${error}`)
     }
 })
