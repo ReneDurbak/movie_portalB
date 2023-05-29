@@ -27,9 +27,7 @@ const MovieComponent = () => {
   return (
     <>
       {movies.map(movie => (
-        <div className="flex-container" key={movie.movie_id}>
-          <div className="movie-card">
-            <p className="rating">80%</p>
+          <div className="movie-card" key={movie.movie_id}>
             <div className="movie">
               <div className="image">
                 <img src={movie.imageurl} alt="Deadpool poster" height="290px" width="240px" />
@@ -43,7 +41,6 @@ const MovieComponent = () => {
               </div>
             </div>
           </div>
-        </div>
       ))}
     </>
   );

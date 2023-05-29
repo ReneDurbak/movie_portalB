@@ -57,10 +57,12 @@ import MovieTab from '../components/MovieTab.jsx';
         </div>
     </header>
     <main>
-        <MovieTab />
+        <div className="flex-container">
+            <MovieTab />
+        </div>
     </main>
     <footer>
-        Made by Team B &copy;2023
+        Made by FilmCodeGurus &copy;2023
     </footer>
     </>
   )
