@@ -1,6 +1,6 @@
-const Pool = require('pg').Pool
+const {Client} = require('pg')
 
-const client = new Pool({
+const client = new Client({
   user: 'postgres',
   host: 'localhost',
   database: 'movieportal',
