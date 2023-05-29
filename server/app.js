@@ -9,11 +9,10 @@ app.use(express.json())
 //create -> done
 app.post("/movies", async(req,res)=>{
     try {
-
         const {genre_id, title_movie, year, summary, imageurl} = req.body;
         var genre = await db.query("SELECT title_genre FROM genre WHERE genre_id = $1", [genre_id])
         genre = genre.rows[0].title_genre;
-        const newMovie = await pool.query("INSERT INTO movies (genre_id, title_genre, title_movie, year, summary, imageurl) VALUES($1,$2,$3,$4,$5, $6) RETURNING *",[genre_id,genre, title_movie, year, summary, imageurl]);
+        const newMovie = await db.query("INSERT INTO movies (genre_id, title_genre, title_movie, year, summary, imageurl) VALUES($1,$2,$3,$4,$5, $6) RETURNING *",[genre_id,genre, title_movie, year, summary, imageurl]);
         res.json(newMovie.rows[0]);
     } catch (error) {
         console.error(error.message);
@@ -50,8 +49,7 @@ app.put("/movies/:id", async(req,res)=>{
         const {genre_id, title_movie, year, summary, imageurl} = req.body;
         var genre = await db.query("SELECT title_genre FROM genre WHERE genre_id = $1", [genre_id]);
         genre = genre.rows[0].title_genre;
-        console.log(genre);
-        const update =  await pool.query("UPDATE movies SET genre_id = $1, title_genre = $2, title_movie = $3, year = $4, summary = $5, imageurl = $6  WHERE movie_id = $7",[genre_id,genre, title_movie, year, summary, imageurl, id]);
+        const update =  await db.query("UPDATE movies SET genre_id = $1, title_genre = $2, title_movie = $3, year = $4, summary = $5, imageurl = $6  WHERE movie_id = $7",[genre_id,genre, title_movie, year, summary, imageurl, id]);
         res.json("[database updated -> record updated]");
     } catch (error) {
         console.error(error.message);
