@@ -1,3 +1,4 @@
+@import url("https://cdn.syncfusion.com/ej2/bootstrap5.css");
 * {
   margin: 0;
   padding: 0;
@@ -28,6 +29,7 @@ body header .head {
 }
 body header .head .search {
   display: flex;
+  justify-content: center;
   margin: 5px;
   margin-left: 270px;
   max-width: 1440px;
@@ -46,9 +48,12 @@ body header .head .search .filters {
 body header .head .search .filters select {
   font-size: 140%;
   border: none;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(228, 212, 212, 0);
   color: white;
   padding: 10px;
+}
+body header .head .search .filters select option {
+  background-color: black;
 }
 body header .head .search input {
   font-size: 22px;
@@ -145,6 +150,3 @@ body footer {
   height: 45px;
   padding-top: 12px;
 }/*# sourceMappingURL=style.css.map */
-
-
-
