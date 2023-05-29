@@ -4,15 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "live-server ."
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-<<<<<<< Updated upstream
-    "live-server": "^1.2.2"
-=======
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "reactjs-popup": "^2.0.5"
@@ -26,6 +26,5 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "vite": "^4.3.2"
->>>>>>> Stashed changes
   }
 }

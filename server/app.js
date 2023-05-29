@@ -3,6 +3,7 @@ const app = express();
 const PORT = 5000;
 const db  = require("./db")
 const cors = require("cors")
+
 app.use(cors())
 app.use(express.json())
 
@@ -49,7 +50,6 @@ app.put("/movies/:id", async(req,res)=>{
         const {genre_id, title_movie, year, summary, imageurl} = req.body;
         var genre = await db.query("SELECT title_genre FROM genre WHERE genre_id = $1", [genre_id]);
         genre = genre.rows[0].title_genre;
-        console.log(genre);
         const update =  await db.query("UPDATE movies SET genre_id = $1, title_genre = $2, title_movie = $3, year = $4, summary = $5, imageurl = $6  WHERE movie_id = $7",[genre_id,genre, title_movie, year, summary, imageurl, id]);
         res.json("[database updated -> record updated]");
     } catch (error) {

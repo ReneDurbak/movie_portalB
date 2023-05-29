@@ -2,7 +2,7 @@ import './css/style.css';
 
 //components
 import MovieTab from '../components/MovieTab.jsx';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 
  function App() {
@@ -36,9 +36,9 @@ import Popup from 'reactjs-popup';
             body: JSON.stringify(body) 
           });
           // toto nejde neviem preco
-            getMovies()
+          MovieTab.getMovies()
                 .then(movies => {
-            setMovies(movies);
+                    MovieTab.setMovies(movies);
           })
 
 
