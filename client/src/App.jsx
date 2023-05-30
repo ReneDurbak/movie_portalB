@@ -52,6 +52,7 @@ const options = [
                     <option value="1">to 2015</option>
                 </select>
               <div>
+                
                     <MultiSelect 
                     labelledBy='Genres' 
                     options={options}
@@ -65,6 +66,34 @@ const options = [
         </div>
     </header>
     <main>
+        <div className="topFilm-section">
+            <div className="popular-section">
+                <div class="module-border-wrap"><div class="module">
+                    <h3 className="popular-header-name">Most popular this month</h3>
+                    <p>Month June</p>
+                </div></div>
+
+                <div className="popular-film">
+                    <img src="https://static.wikia.nocookie.net/the-martian/images/5/52/The_Martian_poster_3.jpg" alt="" />                
+                    <div className="film-info"> 
+                        <div className="rank first">1</div>
+                    </div>  
+                </div>
+                <div className="popular-film">
+                    <img src="https://wallpapercave.com/wp/wp8213746.jpg" alt="" />  
+                    <div className="film-info">          
+                        <div className="rank second">2</div>
+                    </div>  
+                </div>
+                <div className="popular-film">
+                    <img src="https://www.dcplanet.fr/wp-content/uploads/2016/08/Suicide_Squad_Poster.jpg" alt="" /> 
+                    <div className="film-info">             
+                        <div className="rank third">3</div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+
         <div className="flex-container">
             <MovieTab value={selected} />
         </div>

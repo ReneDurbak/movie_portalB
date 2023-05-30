@@ -77,6 +77,70 @@ body header .head .search input#my-input:focus {
   text-indent: 10px;
   transition: 0.5s;
 }
+body main .topFilm-section {
+  height: 470px;
+}
+body main .topFilm-section .popular-section {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 100px 140px 100px 150px;
+  justify-content: center;
+}
+body main .topFilm-section .popular-section .module-border-wrap {
+  max-width: 250px;
+  padding: 1rem;
+  position: relative;
+  background: linear-gradient(to right, red, purple);
+  padding: 3px;
+}
+body main .topFilm-section .popular-section .module {
+  background: #1c1c1c;
+  color: white;
+  padding: 1rem;
+}
+body main .topFilm-section .popular-section .module .popular-header-name {
+  color: white;
+  font-size: 2.2em;
+  margin: 170px 150px 20px 25px;
+}
+body main .topFilm-section .popular-section .module p {
+  color: white;
+  margin: 0px 0px 20px 25px;
+}
+body main .topFilm-section .popular-section .popular-film {
+  cursor: pointer;
+  width: 200px;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: linear-gradient(85deg, #434343, #262626);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  margin-left: 25px;
+}
+body main .topFilm-section .popular-section .popular-film img {
+  width: 200px;
+  height: 315px;
+}
+body main .topFilm-section .popular-section .popular-film .film-info .rank {
+  width: 55px;
+  height: 55px;
+  font-size: 3em;
+  border-radius: 100%;
+  text-align: center;
+}
+body main .topFilm-section .popular-section .popular-film .film-info .first {
+  background-color: rgb(202, 202, 71);
+}
+body main .topFilm-section .popular-section .popular-film .film-info .second {
+  background-color: rgb(194, 194, 176);
+}
+body main .topFilm-section .popular-section .popular-film .film-info .third {
+  background-color: rgb(115, 115, 70);
+}
+body main .topFilm-section .popular-section .popular-film:hover {
+  transform: scale(1.07);
+}
 body main .flex-container {
   display: flex;
   gap: 120px;
