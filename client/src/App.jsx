@@ -130,7 +130,6 @@ import Popup from 'reactjs-popup';
         
     </header>
     <main>
-    
         <div className="flex-container">
             <MovieTab />
         </div>

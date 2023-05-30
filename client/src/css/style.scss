@@ -1,3 +1,6 @@
+@import url('https://unpkg.com/css.gg@2.0.0/icons/css/trash.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
 *{
     margin: 0;
     padding: 0;
@@ -160,7 +163,7 @@ body{
             margin: 140px 150px 100px 150px;
             justify-content: center;
             .movie-card{
-                transition: all .2s ease-in-out;
+                transition: all .4s ease-in-out;
                 .rating{
                     vertical-align: top;
                     height: 32px;
@@ -185,7 +188,7 @@ body{
                     background-color: rgb(56, 56, 56);
                     box-shadow: 30px 30px 20px rgb(0, 0, 0);
                     /*height: auto;*/
-                    height: 490px;  
+                    height: 100%;  
                     width: 280px;
                     cursor: pointer;
                     border-radius: 4px;
@@ -218,34 +221,55 @@ body{
                         width: 40px;
                         height: 40px;
                         float: left;
-                        margin: 5px;
+                        margin: 11px 0 10px 20px;
                         text-align: center;
                         display: flex;
                         align-items: center; 
                         justify-content: center;
                         font-size: 140%;
+                        transition: 0.5s ease-in-out;
+                        .gg-trash {
+                            box-sizing: border-box;
+                            position: relative;
+                            display: block;
+                            transform: scale(var(--ggs,1));
+                            width: 10px;
+                            height: 12px;
+                            border: 2px solid transparent;
+                            box-shadow:
+                                0 0 0 2px,
+                                inset -2px 0 0,
+                                inset 2px 0 0;
+                            border-bottom-left-radius: 1px;
+                            border-bottom-right-radius: 1px;
+                            margin-top: 4px
+                        }
                     }
                     .delete:hover{
                         background-color: red;
-                        transform: scale(1.1);
+                        transform: scale(1.11);
+                        box-shadow: 0px 0px 15px rgb(0, 0, 0);
                     }
-                    .update{
+                    .edit{
                         float: right;
                         color: white;
                         background-color: rgb(211, 195, 23);
                         border-radius: 50%;
                         width: 40px;
                         height: 40px;
-                        margin: 5px;
-                        text-align: center;
-                        display: flex;
-                        align-items: center; 
-                        justify-content: center;
+                        margin: 11px 20px 10px 0;
                         font-size: 140%;
+                        transition: 0.5s ease-in-out;
+                        #fa-edit{
+                            padding: 10.4px 10px 10px 11px;
+                            color: black;
+                            font-weight: bolder;
+                        }
                     }
-                    .update:hover{
+                    .edit:hover{
                         background-color: rgb(255, 234, 0);
-                        transform: scale(1.1);
+                        transform: scale(1.11);
+                        box-shadow: 0px 0px 15px rgb(0, 0, 0);
                     }
                 }
             }
@@ -258,6 +282,7 @@ body{
         background-color: black;
         color: aliceblue;
         text-align: center;
+        width: 100%;
         font-size: 140%;
         font-family: Georgia, 'Times New Roman', Times, serif;
         height: 45px;

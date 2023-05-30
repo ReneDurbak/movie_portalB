@@ -33,6 +33,7 @@ const MovieComponent = () => {
     try {
       const response = await fetch('http://localhost:5000/movies');
       const data = await response.json();
+      console.log(data);
       return data;
     } catch (error) {
       throw new Error('Failed to fetch movies');
@@ -90,7 +91,7 @@ const MovieComponent = () => {
             <div className="movie-card" key={movie.movie_id}  >
               <div className="movie">
                 <div className="image">
-                  <img src={movie.imageurl} alt="Deadpool poster" height="290px" width="240px" />
+                  <img src={movie.imageurl} alt={movie.title_movie} height="330px" width="240px" />
                 </div>
                 <div className="movie-title">{movie.title_movie}</div>
                 <div className="info">
@@ -99,10 +100,10 @@ const MovieComponent = () => {
                   <div className="main-text">Genre:</div>
                   <div className="text">{movie.title_genre}</div>
                 </div>
-                <div className='delete' onClick={()=> deleteMovie(movie.movie_id)}>DD</div>
+                <div className='delete' onClick={()=> deleteMovie(movie.movie_id)}><i className="gg-trash"></i></div>
 
-                <Popup className="popup"  trigger=
-                {<div className="update" >update</div>}
+                <Popup className="popup" trigger=
+                {<div className="edit" ><i className="fa fa-edit" id='fa-edit'></i></div>}
                 modal nested>
                 {
                     close => (
