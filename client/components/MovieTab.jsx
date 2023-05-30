@@ -112,7 +112,7 @@ const MovieComponent = () => {
                             <input placeholder={movie.title_movie} value={title_movie} type="text" onChange={title_movieChange} onDoubleClick={()=>{setTitle_movie(movie.title_movie)}}></input><br></br>
                             <h2>Type release year of the movie:</h2>
                             <input placeholder={movie.year} value={year} type="number" onChange={yeardChange} onDoubleClick={()=>{setYear(movie.year)}}></input><br></br>
-                            <h2>Select movie genre({movie.title_genre}):</h2>
+                            <h2>Select movie genre:</h2>
                             <select name="genre" onChange={genre_idChange}>
                                 <option value="1">action</option>
                                 <option value="2">adventure</option>
@@ -124,7 +124,7 @@ const MovieComponent = () => {
                             <textarea rows="10" placeholder={movie.summary} onChange={summaryChange} value={summary} onDoubleClick={()=>{setSummary(movie.summary)}}></textarea><br></br>
                             <h2>Paste image url of the movie:</h2>
                             <input placeholder={movie.imageurl} type="url" onChange={imageurlChange} value={imageurl} onDoubleClick={()=>{setImageurl(movie.imageurl)}}></input><br></br>
-                            <button className='add' onClick={()=>{updateMovie(movie);cleanFields();close();}}>Update</button>
+                            <button className='add' onClick={()=>{updateMovie(movie);cleanFields();close();}}>Save</button>
                             <button className='cancel' onClick={() => {cleanFields();close()}}>Cancel</button>
                         </div>
                     )
