@@ -1,25 +1,26 @@
 import './css/style.css';
 import { useState } from 'react';
+import { MultiSelect } from "react-multi-select-component";
 //components
 import MovieTab from '../components/MovieTab.jsx';
 
-import { MultiSelect } from "react-multi-select-component";
 const options = [
-  { label: "action", value:1 },
-  {   label: "comedy",value:2 },
-  {  label: "fantasy",value:3},
-];
+    { label: 'Action', value:1 },
+    { label: 'Adventure',value:2 },
+    { label: 'Comedy',value:3},
+    { label: 'Fantasy',value:4},
+    { label: 'Drama',value:5},
+    { label: 'Horror',value:6},
+    { label: 'Thriller',value:7},
+    { label: 'Sci-fi',value:8},
+  
+  ];
 
  function App() {
   //console.log(getMovies())
+  const [selected, setSelected] = useState([]);
 
-    const [selected, setSelected] = useState([]);
-
-    
-    
-
-
-
+  
   return (
     <>
     
@@ -52,7 +53,7 @@ const options = [
                     <option value="1">to 2015</option>
                 </select>
               <div>
-                    <MultiSelect 
+              <MultiSelect 
                     labelledBy='Genres' 
                     options={options}
                     value={selected}
@@ -66,7 +67,7 @@ const options = [
     </header>
     <main>
         <div className="flex-container">
-            <MovieTab value={selected} />
+            <MovieTab props = {selected}/>
         </div>
     </main>
     <footer>

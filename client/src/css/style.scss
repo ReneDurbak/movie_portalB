@@ -9,6 +9,7 @@ body{
     //background-color: #3924af;
     //background-image: linear-gradient(to top, red, orange, yellow, white);
     header{
+        margin-bottom: 150px;
         .web-title{
             font-size: 390%;
             font-weight: bolder;
@@ -88,7 +89,7 @@ background: linear-gradient(12deg, rgba(1,22,30,1) 0%, rgba(18,69,89,1) 30%, rgb
             display: flex;
             gap: 120px;
             flex-wrap: wrap;
-            margin: 100px 140px 100px 150px;
+            margin: 10px 2px 100px 2px;
             justify-content: center;
             .movie-card{
                 transition: all .2s ease-in-out;

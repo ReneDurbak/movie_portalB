@@ -7,6 +7,9 @@
 body {
   background: rgb(225, 218, 220);
 }
+body header {
+  margin-bottom: 150px;
+}
 body header .web-title {
   font-size: 390%;
   font-weight: bolder;
@@ -81,7 +84,7 @@ body main .flex-container {
   display: flex;
   gap: 120px;
   flex-wrap: wrap;
-  margin: 100px 140px 100px 150px;
+  margin: 10px 2px 100px 2px;
   justify-content: center;
 }
 body main .flex-container .movie-card {

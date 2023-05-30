@@ -4,7 +4,10 @@ import { useState ,useEffect } from 'react';
 const MovieComponent = (props) => {
   const [movies, setMovies] = useState([]);
 
-  console.log(props.value)
+  let FilteredGenre = props.props
+
+ 
+  console.log(props.props)
 
   useEffect(() => {
     getMovies()
@@ -29,24 +32,53 @@ const MovieComponent = (props) => {
 
   return (
     <>
-      {movies.map(movie => (
-          <div className="movie-card" key={movie.movie_id}>
-            <div className="movie">
-              <div className="image">
-                <img src={movie.imageurl} alt="Deadpool poster" height="300px" width="240px" />
-              </div>
-              <div className="movie-title">{movie.title_movie}</div>
-              <div className="info">
-                <div className="main-text">Release year:</div>
-                <div className="text">{movie.year}</div>
-                <div className="main-text">Genre:</div>
-                <div className="text">{movie.title_genre}</div>
+      {FilteredGenre.length === 0 ? (
+        movies.map(movie => (
+          <div className="flex-container" key={movie.movie_id}>
+            <div className="movie-card">
+              <div className="movie">
+                <div className="image">
+                  <img src={movie.imageurl} alt="Deadpool poster" height="290px" width="240px" />
+                </div>
+                <div className="movie-title">{movie.title_movie}</div>
+                <div className="info">
+                  <div className="main-text">Release year:</div>
+                  <div className="text">{movie.year}</div>
+                  <div className="main-text">Genre:</div>
+                  <div className="text">{movie.title_genre}</div>
+                </div>
               </div>
             </div>
           </div>
-      ))}
+ 
+        ))
+      ) : (
+        FilteredGenre.map((element) => {
+          const filteredMovies = movies.filter((movie) => movie.title_genre === element.label);
+
+          return filteredMovies.map((movie) => (
+            <div className="movie-card" key={movie.movie_id}>
+              <div className="movie">
+                <div className="image">
+                  <img src={movie.imageurl} alt="Movie poster" height="300px" width="240px" />
+                </div>
+                <div className="movie-title">{movie.title_movie}</div>
+                <div className="info">
+                  <div className="main-text">Release year:</div>
+                  <div className="text">{movie.year}</div>
+                  <div className="main-text">Genre:</div>
+                  <div className="text">{movie.title_genre}</div>
+                </div>
+              </div>
+            </div>
+          ));
+        })
+      )}
     </>
   );
+
+
+
 };
 
 export default MovieComponent;
