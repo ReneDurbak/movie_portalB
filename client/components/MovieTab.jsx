@@ -10,7 +10,7 @@ const MovieComponent = () => {
   const [genre_id, setGenre_id] = useState(1);
   const genre_idChange = (event) => setGenre_id(event.target.value)
 
-  const [year, setYear] = useState(0);
+  const [year, setYear] = useState(2015);
   const yeardChange = (event) => setYear(event.target.value)
 
   const [title_movie, setTitle_movie] = useState("");
@@ -27,7 +27,7 @@ const MovieComponent = () => {
       .catch(error => {
         console.error(error);
       });
-  }, []);
+  }, [movies]);
 
   const getMovies = async () => {
     try {
@@ -39,26 +39,22 @@ const MovieComponent = () => {
     }
   };
 
-  const updateMovie = async (id) => {
+  const updateMovie = async (movie) => {
     try {
         const body = {
             "genre_id": genre_id,
-            "title_movie": title_movie, 
-            "year": year,
-            "summary": summary,
-            "imageurl": imageurl
+            "title_movie": title_movie == "" ? movie.title_movie : title_movie, 
+            "year": year == "" ? movie.year : year,
+            "summary": summary == "" ? movie.summary : summary,
+            "imageurl": imageurl == "" ? movie.imageurl : imageurl
         }
-        const response = await fetch(`http://localhost:5000/movies/${id}`,{
+        console.log(body)
+        const response = await fetch(`http://localhost:5000/movies/${movie.movie_id}`,{
         method: "PUT",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(body)
         
       });
-      console.log(response);
-      getMovies()
-      .then(movies => {
-        setMovies(movies);
-      })
     } catch (error) {
         console.error(error.message);
     }
@@ -79,11 +75,19 @@ const MovieComponent = () => {
     
   };
   //onClick={()=> deleteMovie(movie.movie_id)}
+  //onLoad={()=>{loaded(movie.movie_id)}}
+  const cleanFields = () =>{
+    setGenre_id(1);
+    setImageurl("");
+    setSummary("");
+    setTitle_movie("");
+    setYear(2015);
+  }
 
   return (
     <>
       {movies.map(movie => (
-            <div className="movie-card" key={movie.movie_id} >
+            <div className="movie-card" key={movie.movie_id}  >
               <div className="movie">
                 <div className="image">
                   <img src={movie.imageurl} alt="Deadpool poster" height="290px" width="240px" />
@@ -97,16 +101,16 @@ const MovieComponent = () => {
                 </div>
                 <div className='delete' onClick={()=> deleteMovie(movie.movie_id)}>DD</div>
 
-                <Popup className="popup" trigger=
+                <Popup className="popup"  trigger=
                 {<div className="update" >update</div>}
                 modal nested>
                 {
                     close => (
-                        <div className='modal'>
+                        <div className='modal' >
                             <h2>Type a movie title:</h2>
-                            <input placeholder={movie.title_movie} type="text" onChange={title_movieChange}></input><br></br>
+                            <input placeholder={movie.title_movie} value={title_movie} type="text" onChange={title_movieChange} onDoubleClick={()=>{setTitle_movie(movie.title_movie)}}></input><br></br>
                             <h2>Type release year of the movie:</h2>
-                            <input placeholder={movie.year} type="number" onChange={yeardChange}></input><br></br>
+                            <input placeholder={movie.year} value={year} type="number" onChange={yeardChange} onDoubleClick={()=>{setYear(movie.year)}}></input><br></br>
                             <h2>Select movie genre({movie.title_genre}):</h2>
                             <select name="genre" onChange={genre_idChange}>
                                 <option value="1">action</option>
@@ -116,11 +120,11 @@ const MovieComponent = () => {
                                 <option value="5">drama</option>
                             </select><br></br>
                             <h2>Write a summary of the movie:</h2>
-                            <textarea rows="10" placeholder={movie.summary} onChange={summaryChange}></textarea><br></br>
+                            <textarea rows="10" placeholder={movie.summary} onChange={summaryChange} value={summary} onDoubleClick={()=>{setSummary(movie.summary)}}></textarea><br></br>
                             <h2>Paste image url of the movie:</h2>
-                            <input placeholder={movie.imageurl} type="url" onChange={imageurlChange}></input><br></br>
-                            <button className='add' onClick={()=>{updateMovie(movie.movie_id);close();}}>Add</button>
-                            <button className='cancel' onClick={() => {close();}}>Cancel</button>
+                            <input placeholder={movie.imageurl} type="url" onChange={imageurlChange} value={imageurl} onDoubleClick={()=>{setImageurl(movie.imageurl)}}></input><br></br>
+                            <button className='add' onClick={()=>{updateMovie(movie);cleanFields();close();}}>Update</button>
+                            <button className='cancel' onClick={() => {cleanFields();close()}}>Cancel</button>
                         </div>
                     )
                 }

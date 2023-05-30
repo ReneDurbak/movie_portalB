@@ -35,11 +35,6 @@ import Popup from 'reactjs-popup';
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(body) 
           });
-          // toto nejde neviem preco
-          MovieTab.getMovies()
-                .then(movies => {
-                    MovieTab.setMovies(movies);
-          })
 
 
           console.log(response);
@@ -47,6 +42,13 @@ import Popup from 'reactjs-popup';
             console.error(error.message);
         }
       };
+      const cleanFields = () =>{
+        setGenre_id(1);
+        setImageurl("");
+        setSummary("");
+        setTitle_movie("");
+        setYear(2015);
+      }
 
 
   return (
@@ -118,8 +120,8 @@ import Popup from 'reactjs-popup';
                             <textarea rows="10" placeholder="Movie description" onChange={summaryChange}></textarea><br></br>
                             <h2>Paste image url of the movie:</h2>
                             <input placeholder="Image url" type="url" onChange={imageurlChange}></input><br></br>
-                            <button className='add' onClick={()=>{addMovie();close();}}>Add</button>
-                            <button className='cancel' onClick={() => {close();}}>Cancel</button>
+                            <button className='add' onClick={()=>{addMovie();cleanFields();close();}}>Add</button>
+                            <button className='cancel' onClick={() => {cleanFields();close();}}>Cancel</button>
                         </div>
                     )
                 }
