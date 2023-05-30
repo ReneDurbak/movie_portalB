@@ -58,6 +58,7 @@ const options = [
                     options={options}
                     value={selected}
                     onChange={setSelected}
+                    className="multiselect-container"
                     />
          </div>
                 

@@ -34,9 +34,13 @@ const MovieComponent = (props) => {
     <>
       {FilteredGenre.length === 0 ? (
         movies.map(movie => (
-          <div className="flex-container" key={movie.movie_id}>
-            <div className="movie-card">
+            <div className="movie-card" key={movie.movie_id}>
               <div className="movie">
+              <div className="film-description">
+                <div className='know-more'>Know more</div>
+                <div className='summary-title'>Summary:</div>
+                <div className='movie-summary'>{movie.summary}</div>
+              </div>
                 <div className="image">
                   <img src={movie.imageurl} alt="Deadpool poster" height="290px" width="240px" />
                 </div>
@@ -48,7 +52,6 @@ const MovieComponent = (props) => {
                   <div className="text">{movie.title_genre}</div>
                 </div>
               </div>
-            </div>
           </div>
  
         ))
