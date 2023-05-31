@@ -1,5 +1,5 @@
 import './css/style.css';
-import { useState } from 'react';
+import React, {useState, useEffect} from "react";
 import { MultiSelect } from "react-multi-select-component";
 //components
 import MovieTab from '../components/MovieTab.jsx';
@@ -17,14 +17,11 @@ const options = [
   
   ];
 
-
-
-
-import React, {Fragment, useState, useEffect} from "react";
-
-
  function App() {
   //console.log(getMovies())
+    const [yearFrom, setYearFrom] =  useState(0);
+    const [yearTo, setYearTo] =  useState(3000);
+
   const [selected, setSelected] = useState([]);
   const [movie, setMovie] = useState("");
   const [movies, setMovies] = useState([]);
@@ -75,22 +72,9 @@ import React, {Fragment, useState, useEffect} from "react";
     }
 
     useEffect(()=>{
-
-        async function fetchData(){
-            try{
-                const response = await fetch(`http://localhost:5000/movies`);
-                const parseResponse = await response.json();
-            
-                setMovies(parseResponse);
-                
-                console.log(parseResponse)
-            }catch(error) {
-                console.error(error.message);
-            }
-        }
-        fetchData();
+        
+    },[movie, movies]);
     
-    },[]);
      
     
       const onSubmitForm = async(e) => {
@@ -115,33 +99,31 @@ import React, {Fragment, useState, useEffect} from "react";
         <div className="web-title">MovieVerse</div>
         <div className="head">
             <div className="search">
-                <input type="text" placeholder="Search..." id="my-input"></input>
             <form className="d-flex" onSubmit={onSubmitForm}>
-            <input type="text" name="Search" placeholder="Search..." value={movie} onChange={e => setMovie(e.target.value)}/>
-            <button className="btn btn-success">Submit</button>
+            <input type="text" name="Search" id="my-input" placeholder="Search..." value={movie} onChange={e => setMovie(e.target.value)}/>
             </form>
             <div className="filters">
-                <select name="year-from" id="year">
-                    <option value="1">from 2015</option>
-                    <option value="2">from 2016</option>
-                    <option value="3">from 2017</option>
-                    <option value="4">from 2018</option>
-                    <option value="5">from 2019</option>
-                    <option value="6">from 2020</option>
-                    <option value="7">from 2021</option>
-                    <option value="8">from 2022</option>
-                    <option value="9">from 2023</option>
+                <select name="year-from" id="year" onChange={(event)=>{setYearFrom(event.target.value)}}>
+                    <option value="2015">from 2015</option>
+                    <option value="2016">from 2016</option>
+                    <option value="2017">from 2017</option>
+                    <option value="2018">from 2018</option>
+                    <option value="2019">from 2019</option>
+                    <option value="2020">from 2020</option>
+                    <option value="2021">from 2021</option>
+                    <option value="2022">from 2022</option>
+                    <option value="2023">from 2023</option>
                 </select>
-                <select name="year-to" id="year">
-                    <option value="9">to 2023</option>
-                    <option value="8">to 2022</option>
-                    <option value="7">to 2021</option>
-                    <option value="6">to 2020</option>
-                    <option value="5">to 2019</option>
-                    <option value="4">to 2018</option>
-                    <option value="3">to 2017</option>
-                    <option value="2">to 2016</option>
-                    <option value="1">to 2015</option>
+                <select name="year-to" id="year" onChange={(event)=>{setYearTo(event.target.value)}}>
+                    <option value="2015">to 2015</option>
+                    <option value="2016">to 2016</option>
+                    <option value="2017">to 2017</option>
+                    <option value="2018">to 2018</option>
+                    <option value="2019">to 2019</option>
+                    <option value="2020">to 2020</option>
+                    <option value="2021">to 2021</option>
+                    <option value="2022">to 2022</option>
+                    <option value="2023">to 2023</option>
                 </select>
               <div>
               <MultiSelect 
@@ -172,7 +154,7 @@ import React, {Fragment, useState, useEffect} from "react";
                                 <option value="5">drama</option>
                             </select><br></br>
                             <h2>Write a summary of the movie:</h2>
-                            <textarea rows="10" placeholder="Movie description" onChange={summaryChange}></textarea><br></br>
+                            <textarea rows="7" placeholder="Movie description" onChange={summaryChange}></textarea><br></br>
                             <h2>Paste image url of the movie:</h2>
                             <input placeholder="Image url" type="url" onChange={imageurlChange}></input><br></br>
                             <button className='add' onClick={()=>{addMovie();cleanFields();close();}}>Add</button>
@@ -217,23 +199,7 @@ import React, {Fragment, useState, useEffect} from "react";
             </div>
         </div>
         <div className="flex-container">
-            <MovieTab props = {selected}/>
-        {movies.map(movie => (
-          <div className="movie-card" key={movie.movie_id}>
-            <div className="movie">
-              <div className="image">
-                <img src={movie.imageurl} alt="Deadpool poster" height="315px" width="240px" />
-              </div>
-              <div className="movie-title">{movie.title_movie}</div>
-              <div className="info">
-                <div className="main-text" align="center">Release year:</div>
-                <div className="text" align="center">{movie.year}</div>
-                <div className="main-text" align="center">Genre:</div>
-                <div className="text" align="center">{movie.title_genre}</div>
-              </div>
-            </div>
-          </div>
-      ))}
+            {<MovieTab props = {selected} search = {movie} yearTo = {yearTo} yearFrom = {yearFrom}/>}
         </div>
     </main>
     <footer>

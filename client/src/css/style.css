@@ -9,47 +9,44 @@
 #modal {
   margin: 110px;
   text-align: center;
-  background-color: rgb(169, 169, 169);
+  background: linear-gradient(12deg, rgb(3, 102, 102) 0%, rgb(18, 69, 89) 30%, rgb(3, 102, 102) 50%, rgb(18, 69, 89) 70%, rgb(3, 102, 102) 100%);
   padding: 5px 100px 0 100px;
   position: relative;
   bottom: 110px;
-  border: 3px solid black;
-  box-shadow: 0px 0px 500px rgb(55, 54, 54) inset;
 }
 #modal h2 {
   font-size: 220%;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  color: white;
 }
 #modal h4 {
   font-size: 120%;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 #modal input {
-  width: 71%;
-  margin: 15px 0 25px 0;
+  width: 91%;
+  margin: 5px 0 25px 0;
   font-size: 120%;
   padding: 7px;
-  border: 3px solid black;
   font-family: "Helvetica", Arial, Lucida Grande, sans-serif !important;
 }
 #modal input:focus {
   box-shadow: 1px 1px 17px rgb(0, 0, 0);
 }
 #modal textarea {
-  width: 71%;
+  width: 91%;
   font-size: 120%;
   resize: none;
   margin: 15px 0 40px 0;
   padding: 7px;
   font-family: "Helvetica", Arial, Lucida Grande, sans-serif !important;
-  border: 3px solid black;
 }
 #modal textarea:focus {
   box-shadow: 1px 1px 17px rgb(0, 0, 0);
 }
 #modal .add {
   width: 20%;
-  height: 40px;
+  height: 45px;
   background-color: rgb(77, 176, 24);
   color: black;
   font-size: 160%;
@@ -65,7 +62,7 @@
 }
 #modal .cancel {
   width: 20%;
-  height: 40px;
+  height: 45px;
   background-color: rgb(196, 11, 11);
   color: black;
   font-size: 160%;
@@ -81,11 +78,9 @@
 }
 #modal select {
   font-size: 140%;
-  background-color: rgb(200, 200, 200);
+  background-color: rgb(255, 255, 255);
   padding: 10px;
-  border-radius: 30px;
   margin: 15px 0 30px 0;
-  border: 3px solid black;
 }
 #modal select:focus {
   box-shadow: 1px 1px 17px rgb(0, 0, 0);
@@ -185,20 +180,21 @@ body header .head .search input#my-input:focus {
   transition: 0.5s;
 }
 body header .add-movie {
-  background-color: rgb(51, 203, 51);
-  float: right;
-  margin: 40px 90px 0 0;
+  background-color: rgb(33, 217, 153);
+  margin: 20px 0 20px 80px;
   font-size: 190%;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
-  padding: 7px;
-  border-radius: 15px;
-  box-shadow: 1px 1px 15px rgb(0, 0, 0);
+  font-size: 22px;
+  border-radius: 20px;
+  padding: 6px 6px 3px 12px;
+  font-weight: lighter;
+  border: none;
   transition: 0.5s;
 }
 body header .add-movie:hover {
-  background-color: rgb(15, 241, 15);
+  background-color: rgb(33, 217, 131);
   cursor: pointer;
-  transform: rotate(5deg) scale(1.08);
+  transform: scale(1.05);
 }
 body main .topFilm-section {
   height: 470px;
@@ -295,10 +291,8 @@ body main .flex-container .movie-card .rating {
   border-radius: 4px;
 }
 body main .flex-container .movie-card .movie {
-  background: rgb(1, 22, 30);
-  background: linear-gradient(12deg, rgb(1, 22, 30) 0%, rgb(18, 69, 89) 30%, rgb(3, 102, 102) 50%, rgb(18, 69, 89) 70%, rgb(1, 22, 30) 100%);
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; /*height: auto;*/
-  height: 470px;
+  background: rgb(47, 116, 143); /*height: auto;*/
+  height: 540px;
   width: 280px;
   border-radius: 12px;
 }
@@ -308,7 +302,7 @@ body main .flex-container .movie-card .movie .film-description {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 90%;
   background-color: rgba(0, 0, 0, 0.774);
   color: #fff;
   padding: 12px;
@@ -391,6 +385,7 @@ body footer {
 }
 
 .delete {
+  z-index: 1;
   color: white;
   background-color: rgb(190, 14, 14);
   border-radius: 50%;
@@ -426,6 +421,7 @@ body footer {
 }
 
 .edit {
+  z-index: 3;
   float: right;
   color: white;
   background-color: rgb(211, 195, 23);

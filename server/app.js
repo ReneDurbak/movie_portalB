@@ -58,10 +58,10 @@ app.get("/movies/:id", async(req,res)=>{
 
 app.get("/movies/search", async (req, res) => {
     try {
-      const { term } = req.query;
+      const { term, yearFrom, yearTo } = req.query;
       const movieSearch = await db.query(
-        "SELECT * FROM movies WHERE title_movie ILIKE $1",
-        [`%${term}%`]
+        "SELECT * FROM movies WHERE title_movie ILIKE $1 AND year BETWEEN $2 AND $3",
+        [`%${term}%`, yearFrom, yearTo]
       );
       res.json(movieSearch.rows);
     } catch (error) {

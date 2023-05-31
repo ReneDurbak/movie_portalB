@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Popup from 'reactjs-popup';
 
-const MovieComponent = (props) => {
+const MovieComponent = ({search, props, yearFrom, yearTo}) => {
   const [movies, setMovies] = useState([]);
   const [summary, setSummary] = useState("");
   const summaryChange = (event) => setSummary(event.target.value)
@@ -25,12 +25,16 @@ const MovieComponent = (props) => {
     };
 
     fetchData();
-  }, []);
+  }, [search, yearFrom, yearTo]);
 
   const getMovies = async () => {
     try {
-      const response = await fetch('http://localhost:5000/movies');
+      console.log(search, yearFrom, yearTo)
+      const response = await fetch(`/movies/search?term=${search}&yearFrom=${yearFrom}&yearTo=${yearTo}`);
       const data = await response.json();
+      //setMovies(parseResponse);
+      //const response = await fetch('http://localhost:5000/movies');
+      //const data = await response.json();
       return data;
     } catch (error) {
       throw new Error('Failed to fetch movies');
@@ -103,7 +107,7 @@ const MovieComponent = (props) => {
         break;
     }
   };
-  let FilteredGenre = props.props;
+  let FilteredGenre = props;
   
   return (
     <>
@@ -213,11 +217,11 @@ const MovieComponent = (props) => {
 
         </div>
                 ));
-    }
-            )
+      }
+      )
 
       )
-        }
+      }
     </>
   );
 };
