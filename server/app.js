@@ -16,10 +16,8 @@ app.post("/movies", async(req,res)=>{
         res.json(newMovie.rows[0]);
     } catch (error) {
         console.error(error.message);
-        res.json(`Error has occurred: ${error}`)
     }
 })
-
 
 //get all movies -> done
 app.get("/movies", async(req,res)=>{
@@ -33,41 +31,15 @@ app.get("/movies", async(req,res)=>{
 })
 
 // get concrete movie -> done
-/*
 app.get("/movies/:id", async(req,res)=>{
     try {
-        const {search} = req.query;
-
         const {id} = req.params;
         const movie = await db.query("SELECT * FROM movies WHERE movie_id = $1", [id]);
-
-        const movieSearch = await db.query("SELECT * FROM movies WHERE title_movie || ' ' || title_genre ILIKE $1",
-         [`%${search}%`]
-         );
-
-        res.json(movieSearch.rows);
-        //console.log(search)
-
-        //res.json(movie.rows[0]);
+        res.json(movie.rows[0]);
     } catch (error) {
         console.error(error.message);
-        res.json(`Error has occurred: ${error}`)
     }
 })
-*/
-
-app.get("/movies/search", async (req, res) => {
-    try {
-      const { term } = req.query;
-      const movieSearch = await db.query(
-        "SELECT * FROM movies WHERE title_movie ILIKE $1",
-        [`%${term}%`]
-      );
-      res.json(movieSearch.rows);
-    } catch (error) {
-      console.error(error.message);
-    }
-  });
 
 // update concrete movie -> done
 // 
@@ -81,7 +53,6 @@ app.put("/movies/:id", async(req,res)=>{
         res.json("[database updated -> record updated]");
     } catch (error) {
         console.error(error.message);
-        res.json(`Error has occurred: ${error}`)
     }
 })
 
@@ -94,13 +65,10 @@ app.delete("/movies/:id", async(req,res)=>{
         res.json("[database updated -> record deleted]");
     } catch (error) {
         console.error(error.message);
-        res.json(`Error has occurred: ${error}`)
     }
 })
 
+app.listen(PORT, ()=>{console.log(`Server is running on PORT ${PORT}`)})
 
 
-app.listen(PORT, ()=>{
-    console.log(`Server is running on PORT ${PORT}`);
-});
 
