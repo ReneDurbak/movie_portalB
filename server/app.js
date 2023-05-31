@@ -17,7 +17,9 @@ app.post("/movies", async(req,res)=>{
     } catch (error) {
         console.error(error.message);
         res.json(`Error has occurred: ${error}`)
+    }
 })
+
 
 //get all movies -> done
 app.get("/movies", async(req,res)=>{
