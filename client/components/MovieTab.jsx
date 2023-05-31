@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 const MovieComponent = () => {
   const [movies, setMovies] = useState([]);
+ 
 
   useEffect(() => {
     getMovies()
@@ -30,14 +31,14 @@ const MovieComponent = () => {
           <div className="movie-card" key={movie.movie_id}>
             <div className="movie">
               <div className="image">
-                <img src={movie.imageurl} alt="Deadpool poster" height="290px" width="240px" />
+                <img src={movie.imageurl} alt="Deadpool poster" height="315px" width="240px" />
               </div>
               <div className="movie-title">{movie.title_movie}</div>
               <div className="info">
-                <div className="main-text">Release year:</div>
-                <div className="text">{movie.year}</div>
-                <div className="main-text">Genre:</div>
-                <div className="text">{movie.title_genre}</div>
+                <div className="main-text" align="center">Release year:</div>
+                <div className="text" align="center">{movie.year}</div>
+                <div className="main-text" align="center">Genre:</div>
+                <div className="text" align="center">{movie.title_genre}</div>
               </div>
             </div>
           </div>
