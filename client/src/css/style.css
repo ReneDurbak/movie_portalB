@@ -5,31 +5,36 @@
   padding: 0;
 }
 
-.modal {
+#modal {
   margin: 110px;
   text-align: center;
   background-color: rgb(169, 169, 169);
-  padding: 10px 100px 0 100px;
+  padding: 5px 100px 0 100px;
   position: relative;
-  bottom: 100px;
+  bottom: 110px;
   border: 3px solid black;
+  box-shadow: 0px 0px 500px rgb(55, 54, 54) inset;
 }
-.modal h2 {
+#modal h2 {
   font-size: 220%;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
-.modal input {
+#modal h4 {
+  font-size: 120%;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+#modal input {
   width: 71%;
-  margin: 15px 0 30px 0;
+  margin: 15px 0 25px 0;
   font-size: 120%;
   padding: 7px;
   border: 3px solid black;
   font-family: "Helvetica", Arial, Lucida Grande, sans-serif !important;
 }
-.modal input:focus {
+#modal input:focus {
   box-shadow: 1px 1px 17px rgb(0, 0, 0);
 }
-.modal textarea {
+#modal textarea {
   width: 71%;
   font-size: 120%;
   resize: none;
@@ -38,10 +43,10 @@
   font-family: "Helvetica", Arial, Lucida Grande, sans-serif !important;
   border: 3px solid black;
 }
-.modal textarea:focus {
+#modal textarea:focus {
   box-shadow: 1px 1px 17px rgb(0, 0, 0);
 }
-.modal .add {
+#modal .add {
   width: 20%;
   height: 40px;
   background-color: rgb(77, 176, 24);
@@ -52,11 +57,12 @@
   box-shadow: 1px 1px 5px rgb(0, 0, 0);
   border-radius: 7px;
 }
-.modal .add:hover {
+#modal .add:hover {
   background-color: rgb(92, 227, 14);
   box-shadow: 5px 5px 10px rgb(0, 0, 0);
+  border: 2.5px solid black;
 }
-.modal .cancel {
+#modal .cancel {
   width: 20%;
   height: 40px;
   background-color: rgb(196, 11, 11);
@@ -67,11 +73,12 @@
   box-shadow: 1px 1px 5px rgb(0, 0, 0);
   border-radius: 7px;
 }
-.modal .cancel:hover {
+#modal .cancel:hover {
   background-color: rgb(255, 0, 0);
   box-shadow: 5px 5px 10px rgb(0, 0, 0);
+  border: 2.5px solid black;
 }
-.modal select {
+#modal select {
   font-size: 140%;
   background-color: rgb(200, 200, 200);
   padding: 10px;
@@ -79,8 +86,13 @@
   margin: 15px 0 30px 0;
   border: 3px solid black;
 }
-.modal select:focus {
+#modal select:focus {
   box-shadow: 1px 1px 17px rgb(0, 0, 0);
+}
+
+.modal-add {
+  position: relative;
+  top: -89px;
 }
 
 body {

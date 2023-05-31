@@ -103,7 +103,7 @@ import Popup from 'reactjs-popup';
                 modal nested>
                 {
                     close => (
-                        <div className='modal'>
+                        <div className='modal-add' id='modal'>
                             <h2>Type a movie title:</h2>
                             <input placeholder="Movie title" type="text" onChange={title_movieChange}></input><br></br>
                             <h2>Type release year of the movie:</h2>

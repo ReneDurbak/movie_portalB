@@ -107,7 +107,7 @@ const MovieComponent = () => {
                 modal nested>
                 {
                     close => (
-                        <div className='modal' >
+                        <div className='modal-edit' id='modal'>
                             <h2>Type a movie title:</h2>
                             <input placeholder={movie.title_movie} value={title_movie} type="text" onChange={title_movieChange} onDoubleClick={()=>{setTitle_movie(movie.title_movie)}}></input><br></br>
                             <h2>Type release year of the movie:</h2>
@@ -120,7 +120,7 @@ const MovieComponent = () => {
                                 <option value="4">fantasy</option>
                                 <option value="5">drama</option>
                             </select><br></br>
-                            <h2>Write a summary of the movie:</h2>
+                            <h2>Write a summary of the movie:</h2><br></br><h4>If you want to just rewrite existing text, double click on the field</h4>
                             <textarea rows="10" placeholder={movie.summary} onChange={summaryChange} value={summary} onDoubleClick={()=>{setSummary(movie.summary)}}></textarea><br></br>
                             <h2>Paste image url of the movie:</h2>
                             <input placeholder={movie.imageurl} type="url" onChange={imageurlChange} value={imageurl} onDoubleClick={()=>{setImageurl(movie.imageurl)}}></input><br></br>
