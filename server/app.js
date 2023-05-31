@@ -3,14 +3,12 @@ const app = express();
 const PORT = 5000;
 const db  = require("./db")
 const cors = require("cors")
-
 app.use(cors())
 app.use(express.json())
 
 //create -> done
 app.post("/movies", async(req,res)=>{
     try {
-
         const {genre_id, title_movie, year, summary, imageurl} = req.body;
         var genre = await db.query("SELECT title_genre FROM genre WHERE genre_id = $1", [genre_id])
         genre = genre.rows[0].title_genre;
@@ -18,7 +16,7 @@ app.post("/movies", async(req,res)=>{
         res.json(newMovie.rows[0]);
     } catch (error) {
         console.error(error.message);
-    }
+        res.json(`Error has occurred: ${error}`)
 })
 
 //get all movies -> done
@@ -28,6 +26,7 @@ app.get("/movies", async(req,res)=>{
         res.json(allMoview.rows);
     } catch (error) {
         console.error(error.message);
+        res.json(`Error has occurred: ${error}`)
     }
 })
 
@@ -39,6 +38,7 @@ app.get("/movies/:id", async(req,res)=>{
         res.json(movie.rows[0]);
     } catch (error) {
         console.error(error.message);
+        res.json(`Error has occurred: ${error}`)
     }
 })
 
@@ -54,6 +54,7 @@ app.put("/movies/:id", async(req,res)=>{
         res.json("[database updated -> record updated]");
     } catch (error) {
         console.error(error.message);
+        res.json(`Error has occurred: ${error}`)
     }
 })
 
@@ -66,6 +67,7 @@ app.delete("/movies/:id", async(req,res)=>{
         res.json("[database updated -> record deleted]");
     } catch (error) {
         console.error(error.message);
+        res.json(`Error has occurred: ${error}`)
     }
 })
 

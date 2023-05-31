@@ -1,10 +1,11 @@
-const Pool = require('pg').Pool
+const {Client} = require('pg')
+require('dotenv').config()
 
-const client = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'moviePortal',
-  password: 'postgres',
+const client = new Client({
+  user: process.env.USER,
+  host: process.env.URL,
+  database: 'movieportal',
+  password: process.env.PASSWORD,
   port: 5432,
 })
 client.connect(function(err) {

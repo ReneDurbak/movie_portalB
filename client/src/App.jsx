@@ -1,67 +1,83 @@
 import './css/style.css';
-
+import { useState } from 'react';
+import { MultiSelect } from "react-multi-select-component";
 //components
 import MovieTab from '../components/MovieTab.jsx';
-import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 
+const options = [
+    { label: 'Action', value:1 },
+    { label: 'Adventure',value:2 },
+    { label: 'Comedy',value:3},
+    { label: 'Fantasy',value:4},
+    { label: 'Drama',value:5},
+    { label: 'Horror',value:6},
+    { label: 'Thriller',value:7},
+    { label: 'Sci-fi',value:8},
+  
+  ];
+
+
+
+
  function App() {
-    const [summary, setSummary] = useState("");
-    const summaryChange = (event) => setSummary(event.target.value)
+  //console.log(getMovies())
+  const [selected, setSelected] = useState([]);
 
-    const [genre_id, setGenre_id] = useState(1);
-    const genre_idChange = (event) => setGenre_id(event.target.value)
+  const [summary, setSummary] = useState("");
+  const summaryChange = (event) => setSummary(event.target.value)
 
-    const [year, setYear] = useState(0);
-    const yeardChange = (event) => setYear(event.target.value)
+  const [genre_id, setGenre_id] = useState(1);
+  const genre_idChange = (event) => setGenre_id(event.target.value)
 
-    const [title_movie, setTitle_movie] = useState("");
-    const title_movieChange = (event) => setTitle_movie(event.target.value)
+  const [year, setYear] = useState(0);
+  const yeardChange = (event) => setYear(event.target.value)
 
-    const [imageurl, setImageurl] = useState("");
-    const imageurlChange = (event) => setImageurl(event.target.value)
+  const [title_movie, setTitle_movie] = useState("");
+  const title_movieChange = (event) => setTitle_movie(event.target.value)
 
-    const addMovie = async () => {
-        try {
-            const body = {
-                "genre_id": genre_id,
-                "title_movie": title_movie, 
-                "year": year,
-                "summary": summary,
-                "imageurl": imageurl
-            }
-            const response = await fetch('http://localhost:5000/movies',{
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(body) 
-          });
+  const [imageurl, setImageurl] = useState("");
+  const imageurlChange = (event) => setImageurl(event.target.value)
+  
+
+  const addMovie = async () => {
+      try {
+          const body = {
+              "genre_id": genre_id,
+              "title_movie": title_movie, 
+              "year": year,
+              "summary": summary,
+              "imageurl": imageurl
+          }
+          const response = await fetch('http://localhost:5000/movies',{
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(body) 
+        });
 
 
-          console.log(response);
-        } catch (error) {
-            console.error(error.message);
-        }
-      };
-      const cleanFields = () =>{
-        setGenre_id(1);
-        setImageurl("");
-        setSummary("");
-        setTitle_movie("");
-        setYear(2015);
+        console.log(response);
+      } catch (error) {
+          console.error(error.message);
       }
-
-
+    };
+    const cleanFields = () =>{
+      setGenre_id(1);
+      setImageurl("");
+      setSummary("");
+      setTitle_movie("");
+      setYear(2015);
+    }
   return (
     <>
+    
     <header>
         <div className="web-title">MovieVerse</div>
         <div className="head">
             <div className="search">
                 <input type="text" placeholder="Search..." id="my-input"></input>
-            </div>
             <div className="filters">
                 <select name="year-from" id="year">
-                    <option value>Select year from</option>
                     <option value="1">from 2015</option>
                     <option value="2">from 2016</option>
                     <option value="3">from 2017</option>
@@ -73,32 +89,27 @@ import Popup from 'reactjs-popup';
                     <option value="9">from 2023</option>
                 </select>
                 <select name="year-to" id="year">
-                    <option value>Select year to</option>
-                    <option value="1">to 2015</option>
-                    <option value="2">to 2016</option>
-                    <option value="3">to 2017</option>
-                    <option value="4">to 2018</option>
-                    <option value="5">to 2019</option>
-                    <option value="6">to 2020</option>
-                    <option value="7">to 2021</option>
-                    <option value="8">to 2022</option>
                     <option value="9">to 2023</option>
+                    <option value="8">to 2022</option>
+                    <option value="7">to 2021</option>
+                    <option value="6">to 2020</option>
+                    <option value="5">to 2019</option>
+                    <option value="4">to 2018</option>
+                    <option value="3">to 2017</option>
+                    <option value="2">to 2016</option>
+                    <option value="1">to 2015</option>
                 </select>
-                <select name="genre" id="genre">
-                    <option value>Select genre</option>
-                    <option value="1">action</option>
-                    <option value="2">comedy</option>
-                    <option value="3">fantasy</option>
-                    <option value="4">romance</option>
-                    <option value="5">animation</option>
-                    <option value="6">crime</option>
-                    <option value="7">drama</option>
-                    <option value="8">horror</option>
-                    <option value="9">thriller</option>
-                </select>
-            </div>
-        </div>
-        <Popup className="popup" trigger=
+              <div>
+              <MultiSelect 
+                    labelledBy='Genres' 
+                    options={options}
+                    value={selected}
+                    onChange={setSelected}
+                    className="multiselect-container"
+                    />
+         </div>
+
+         <Popup className="popup" trigger=
                 {<div className="add-movie" >Add movie</div>}
                 modal nested>
                 {
@@ -126,12 +137,43 @@ import Popup from 'reactjs-popup';
                     )
                 }
             </Popup>
-        
-        
+                
+            </div>
+            </div>
+        </div>
+
+      
     </header>
     <main>
+        <div className="topFilm-section">
+            <div className="popular-section">
+                <div className="module-border-wrap"><div className="module">
+                    <h3 className="popular-header-name">Most popular this month</h3>
+                    <p>Month June</p>
+                </div></div>
+
+                <div className="popular-film">
+                    <img src="https://static.wikia.nocookie.net/the-martian/images/5/52/The_Martian_poster_3.jpg" alt="" />                
+                    <div className="film-info"> 
+                        <div className="rank first">1</div>
+                    </div>  
+                </div>
+                <div className="popular-film">
+                    <img src="https://wallpapercave.com/wp/wp8213746.jpg" alt="" />  
+                    <div className="film-info">          
+                        <div className="rank second">2</div>
+                    </div>  
+                </div>
+                <div className="popular-film">
+                    <img src="https://www.dcplanet.fr/wp-content/uploads/2016/08/Suicide_Squad_Poster.jpg" alt="" /> 
+                    <div className="film-info">             
+                        <div className="rank third">3</div>
+                    </div>  
+                </div>
+            </div>
+        </div>
         <div className="flex-container">
-            <MovieTab />
+            <MovieTab props = {selected}/>
         </div>
     </main>
     <footer>
@@ -140,5 +182,8 @@ import Popup from 'reactjs-popup';
     </>
   )
 }
+
+
+
 export default App;
 
