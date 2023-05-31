@@ -9,8 +9,6 @@ CREATE TABLE movies(
     year INT, 
     summary VARCHAR(6500) NOT NULL,
     imageurl TEXT
-
-
 );
 
 CREATE TABLE genre(
@@ -20,15 +18,7 @@ CREATE TABLE genre(
 
 
 
-INSERT INTO genre (genre_id,title_genre) VALUES
-    (1,'action'),
-    (2,'adventure'),
-    (3,'comedy'),
-    (4,'fantasy'),
-    (5,'drama'),
-    (6, 'horror'),
-    (7, 'thriller'),
-    (8, 'sci-fi');
+
 
 
 

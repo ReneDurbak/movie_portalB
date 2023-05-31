@@ -20,9 +20,14 @@ const options = [
 
 
 
+import React, {Fragment, useState, useEffect} from "react";
+
+
  function App() {
   //console.log(getMovies())
   const [selected, setSelected] = useState([]);
+  const [movie, setMovie] = useState("");
+  const [movies, setMovies] = useState([]);
 
   const [summary, setSummary] = useState("");
   const summaryChange = (event) => setSummary(event.target.value)
@@ -68,7 +73,42 @@ const options = [
       setTitle_movie("");
       setYear(2015);
     }
+
+    useEffect(()=>{
+
+        async function fetchData(){
+            try{
+                const response = await fetch(`http://localhost:5000/movies`);
+                const parseResponse = await response.json();
+            
+                setMovies(parseResponse);
+                
+                console.log(parseResponse)
+            }catch(error) {
+                console.error(error.message);
+            }
+        }
+        fetchData();
+    
+    },[]);
+     
+    
+      const onSubmitForm = async(e) => {
+        e.preventDefault();
+        try{
+            const response = await fetch(`http://localhost:5000/movies/search?term=${movie}`);
+            const parseResponse = await response.json();
+    
+            setMovies(parseResponse);
+            
+            console.log(parseResponse)
+        }catch(error) {
+            console.error(error.message);
+        }
+      }
+
   return (
+    
     <>
     
     <header>
@@ -76,6 +116,10 @@ const options = [
         <div className="head">
             <div className="search">
                 <input type="text" placeholder="Search..." id="my-input"></input>
+            <form className="d-flex" onSubmit={onSubmitForm}>
+            <input type="text" name="Search" placeholder="Search..." value={movie} onChange={e => setMovie(e.target.value)}/>
+            <button className="btn btn-success">Submit</button>
+            </form>
             <div className="filters">
                 <select name="year-from" id="year">
                     <option value="1">from 2015</option>
@@ -174,6 +218,22 @@ const options = [
         </div>
         <div className="flex-container">
             <MovieTab props = {selected}/>
+        {movies.map(movie => (
+          <div className="movie-card" key={movie.movie_id}>
+            <div className="movie">
+              <div className="image">
+                <img src={movie.imageurl} alt="Deadpool poster" height="315px" width="240px" />
+              </div>
+              <div className="movie-title">{movie.title_movie}</div>
+              <div className="info">
+                <div className="main-text" align="center">Release year:</div>
+                <div className="text" align="center">{movie.year}</div>
+                <div className="main-text" align="center">Genre:</div>
+                <div className="text" align="center">{movie.title_genre}</div>
+              </div>
+            </div>
+          </div>
+      ))}
         </div>
     </main>
     <footer>
