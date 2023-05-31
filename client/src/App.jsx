@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { MultiSelect } from "react-multi-select-component";
 //components
 import MovieTab from '../components/MovieTab.jsx';
+import Popup from 'reactjs-popup';
 
 const options = [
     { label: 'Action', value:1 },
@@ -16,11 +17,57 @@ const options = [
   
   ];
 
+
+
+
  function App() {
   //console.log(getMovies())
   const [selected, setSelected] = useState([]);
 
+  const [summary, setSummary] = useState("");
+  const summaryChange = (event) => setSummary(event.target.value)
+
+  const [genre_id, setGenre_id] = useState(1);
+  const genre_idChange = (event) => setGenre_id(event.target.value)
+
+  const [year, setYear] = useState(0);
+  const yeardChange = (event) => setYear(event.target.value)
+
+  const [title_movie, setTitle_movie] = useState("");
+  const title_movieChange = (event) => setTitle_movie(event.target.value)
+
+  const [imageurl, setImageurl] = useState("");
+  const imageurlChange = (event) => setImageurl(event.target.value)
   
+
+  const addMovie = async () => {
+      try {
+          const body = {
+              "genre_id": genre_id,
+              "title_movie": title_movie, 
+              "year": year,
+              "summary": summary,
+              "imageurl": imageurl
+          }
+          const response = await fetch('http://localhost:5000/movies',{
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(body) 
+        });
+
+
+        console.log(response);
+      } catch (error) {
+          console.error(error.message);
+      }
+    };
+    const cleanFields = () =>{
+      setGenre_id(1);
+      setImageurl("");
+      setSummary("");
+      setTitle_movie("");
+      setYear(2015);
+    }
   return (
     <>
     
@@ -61,6 +108,35 @@ const options = [
                     className="multiselect-container"
                     />
          </div>
+
+         <Popup className="popup" trigger=
+                {<div className="add-movie" >Add movie</div>}
+                modal nested>
+                {
+                    close => (
+                        <div className='modal'>
+                            <h2>Type a movie title:</h2>
+                            <input placeholder="Movie title" type="text" onChange={title_movieChange}></input><br></br>
+                            <h2>Type release year of the movie:</h2>
+                            <input placeholder="Release year" type="number" onChange={yeardChange}></input><br></br>
+                            <h2>Select movie genre:</h2>
+                            <select name="genre" onChange={genre_idChange}>
+                                <option value="1">action</option>
+                                <option value="2">adventure</option>
+                                <option value="3">comedy</option>
+                                <option value="4">fantasy</option>
+                                <option value="5">drama</option>
+                            </select><br></br>
+                            <h2>Write a summary of the movie:</h2>
+                            <textarea rows="10" placeholder="Movie description" onChange={summaryChange}></textarea><br></br>
+                            <h2>Paste image url of the movie:</h2>
+                            <input placeholder="Image url" type="url" onChange={imageurlChange}></input><br></br>
+                            <button className='add' onClick={()=>{addMovie();cleanFields();close();}}>Add</button>
+                            <button className='cancel' onClick={() => {cleanFields();close();}}>Cancel</button>
+                        </div>
+                    )
+                }
+            </Popup>
                 
             </div>
             </div>
@@ -71,7 +147,7 @@ const options = [
     <main>
         <div className="topFilm-section">
             <div className="popular-section">
-                <div class="module-border-wrap"><div class="module">
+                <div className="module-border-wrap"><div className="module">
                     <h3 className="popular-header-name">Most popular this month</h3>
                     <p>Month June</p>
                 </div></div>
