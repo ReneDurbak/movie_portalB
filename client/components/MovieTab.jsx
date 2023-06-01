@@ -30,8 +30,9 @@ const MovieComponent = ({search, props, yearFrom, yearTo}) => {
   const getMovies = async () => {
     try {
       console.log(search, yearFrom, yearTo)
-      const response = await fetch(`/movies/search?term=${search}&yearFrom=${yearFrom}&yearTo=${yearTo}`);
+      const response = await fetch(`http://localhost:5000/movies/search?term=${search}&yearFrom=${yearFrom}&yearTo=${yearTo}`);
       const data = await response.json();
+      console.log(data);
       //setMovies(parseResponse);
       //const response = await fetch('http://localhost:5000/movies');
       //const data = await response.json();
