@@ -4,6 +4,7 @@ import { MultiSelect } from "react-multi-select-component";
 //components
 import MovieTab from '../components/MovieTab.jsx';
 import Popup from 'reactjs-popup';
+import CookieBanner from '../components/cookiebanner';
 
 const options = [
     { label: 'Action', value:1 },
@@ -252,6 +253,7 @@ const options = [
             {<MovieTab props = {selected} search = {movie} yearTo = {yearTo} yearFrom = {yearFrom} refreshFlag={refreshFlag}/>}
         </div>
     </main>
+    <CookieBanner/>
     <footer>
         Made by FilmCodeGurus &copy;2023
     </footer>

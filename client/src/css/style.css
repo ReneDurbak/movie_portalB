@@ -384,6 +384,61 @@ body footer {
   height: 45px;
   padding-top: 12px;
 }
+body .cookie-banner {
+  font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu, sans-serif;
+  position: fixed;
+  border-radius: 25px;
+  top: 20px;
+  right: 20px;
+  width: 15%;
+  background-color: #ffffff;
+  padding: 10px;
+  text-align: center;
+  transition: opacity 0.3s;
+}
+body .cookie-banner p {
+  text-align: left;
+}
+body .cookie-banner div {
+  display: flex;
+  padding-top: 10px;
+}
+body .cookie-banner .allow {
+  background-color: rgb(255, 255, 255);
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 15px;
+  border-radius: 20px;
+  outline: 2px black;
+  padding: 8px;
+  font-weight: lighter;
+  border: 1px solid black;
+  transition: 0.5s;
+  margin-right: 10px;
+}
+body .cookie-banner .allow:hover {
+  transform: scale(1.11);
+}
+body .cookie-banner .reject:hover {
+  transform: scale(1.11);
+}
+body .cookie-banner .reject {
+  background-color: rgb(240, 72, 72);
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 15px;
+  border-radius: 20px;
+  padding: 8px;
+  font-weight: lighter;
+  border: none;
+  transition: 0.5s;
+  text-decoration: underline;
+}
+body .cookie-banner.show {
+  opacity: 1;
+}
+body .cookie-banner.hide {
+  opacity: 0;
+  pointer-events: none;
+}
 
 .delete {
   z-index: 1;
