@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Popup from 'reactjs-popup';
 
-const MovieComponent = ({search, props, yearFrom, yearTo}) => {
+const MovieComponent = ({search, props, yearFrom, yearTo, refreshFlag}) => {
   const [movies, setMovies] = useState([]);
   const [summary, setSummary] = useState("");
   const summaryChange = (event) => setSummary(event.target.value)
@@ -23,16 +23,14 @@ const MovieComponent = ({search, props, yearFrom, yearTo}) => {
         console.error('Error fetching movies:', error);
       }
     };
-
+    console.log("idk")
     fetchData();
-  }, [search, yearFrom, yearTo]);
+  }, [search, yearFrom, yearTo, refreshFlag]);
 
   const getMovies = async () => {
     try {
-      console.log(search, yearFrom, yearTo)
       const response = await fetch(`http://localhost:5000/movies/search?term=${search}&yearFrom=${yearFrom}&yearTo=${yearTo}`);
       const data = await response.json();
-      console.log(data);
       //setMovies(parseResponse);
       //const response = await fetch('http://localhost:5000/movies');
       //const data = await response.json();

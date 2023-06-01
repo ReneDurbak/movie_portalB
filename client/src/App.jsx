@@ -19,12 +19,13 @@ const options = [
 
  function App() {
   //console.log(getMovies())
-    const [yearFrom, setYearFrom] =  useState(0);
-    const [yearTo, setYearTo] =  useState(3000);
+  const [yearFrom, setYearFrom] =  useState(0);
+  const [yearTo, setYearTo] =  useState(3000);
+
+  const [refreshFlag, setRefreshFlag] = useState(true);
 
   const [selected, setSelected] = useState([]);
   const [movie, setMovie] = useState("");
-  const [movies, setMovies] = useState([]);
 
   const [summary, setSummary] = useState("");
   const summaryChange = (event) => setSummary(event.target.value)
@@ -51,14 +52,15 @@ const options = [
               "summary": summary,
               "imageurl": imageurl
           }
+          
           const response = await fetch('http://localhost:5000/movies',{
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify(body) 
         });
 
+        setRefreshFlag(!true);
 
-        console.log(response);
       } catch (error) {
           console.error(error.message);
       }
@@ -72,8 +74,7 @@ const options = [
     }
 
     useEffect(()=>{
-        
-    },[movie, movies]);
+    },[movie]);
     
      
     
@@ -199,7 +200,7 @@ const options = [
             </div>
         </div>
         <div className="flex-container">
-            {<MovieTab props = {selected} search = {movie} yearTo = {yearTo} yearFrom = {yearFrom}/>}
+            {<MovieTab props = {selected} search = {movie} yearTo = {yearTo} yearFrom = {yearFrom} refreshFlag={refreshFlag}/>}
         </div>
     </main>
     <footer>
