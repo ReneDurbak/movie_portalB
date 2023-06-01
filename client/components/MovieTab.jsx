@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Popup from 'reactjs-popup';
 
 const MovieComponent = ({search, props, yearFrom, yearTo, refreshFlag}) => {
+
   const [movies, setMovies] = useState([]);
+
   const [summary, setSummary] = useState("");
   const summaryChange = (event) => setSummary(event.target.value)
   const [genre_id, setGenre_id] = useState(1);
@@ -26,6 +28,8 @@ const MovieComponent = ({search, props, yearFrom, yearTo, refreshFlag}) => {
     console.log("idk")
     fetchData();
   }, [search, yearFrom, yearTo, refreshFlag]);
+
+  
 
   const getMovies = async () => {
     try {
@@ -137,7 +141,7 @@ const MovieComponent = ({search, props, yearFrom, yearTo, refreshFlag}) => {
   modal nested>
   {
       close => (
-          <div className='modal' >
+          <div id='modal'>
               <h2>Type a movie title:</h2>
               <input placeholder={movie.title_movie} value={title_movie} type="text" onChange={title_movieChange} onDoubleClick={()=>{setTitle_movie(movie.title_movie)}}></input><br></br>
               <h2>Type release year of the movie:</h2>

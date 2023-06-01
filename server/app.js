@@ -69,6 +69,34 @@ app.get("/movies/search", async (req, res) => {
     }
   });
 
+
+
+
+  // top3 film
+  app.get("/movies/top", async (req, res) => {
+    try {
+        const topMovies = await db.query(
+          "SELECT * FROM movies ORDER BY ranking DESC LIMIT 3"
+        );
+        res.json(topMovies.rows);
+    } catch (error) {
+      console.error(error.message);
+    }
+  });
+
+
+  // top views film
+  app.get("/movies/viewsTop", async (req, res) => {
+    try {
+        const topViewsMovies = await db.query(
+          "SELECT * FROM movies ORDER BY views DESC LIMIT 3"
+        );
+        res.json(topViewsMovies.rows);
+    } catch (error) {
+      console.error(error.message);
+    }
+  });
+
 // update concrete movie -> done
 // 
 app.put("/movies/:id", async(req,res)=>{
@@ -84,6 +112,7 @@ app.put("/movies/:id", async(req,res)=>{
         res.json(`Error has occurred: ${error}`)
     }
 })
+
 
 
 //delete conrete movie -> done

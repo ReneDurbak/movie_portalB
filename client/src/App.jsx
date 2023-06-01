@@ -18,11 +18,13 @@ const options = [
   ];
 
  function App() {
+  const [topMovies, setTopMovies] = useState([]);
+  const [topViewsMovies, setTopViewsMovies] = useState([]);
   //console.log(getMovies())
   const [yearFrom, setYearFrom] =  useState(0);
   const [yearTo, setYearTo] =  useState(3000);
 
-  const [refreshFlag, setRefreshFlag] = useState(true);
+  const [refreshFlag, setRefreshFlag] = useState(0);
 
   const [selected, setSelected] = useState([]);
   const [movie, setMovie] = useState("");
@@ -42,6 +44,31 @@ const options = [
   const [imageurl, setImageurl] = useState("");
   const imageurlChange = (event) => setImageurl(event.target.value)
   
+  const getTopMovies = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/movies/top`);
+      const data = await response.json();
+      //setMovies(parseResponse);
+      //const response = await fetch('http://localhost:5000/movies');
+      //const data = await response.json();
+      return data;
+    } catch (error) {
+      throw new Error('Failed to fetch movies');
+    }
+  };
+
+  const getTopViewsMovies = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/movies/viewsTop`);
+      const data = await response.json();
+      //setMovies(parseResponse);
+      //const response = await fetch('http://localhost:5000/movies');
+      //const data = await response.json();
+      return data;
+    } catch (error) {
+      throw new Error('Failed to fetch movies');
+    }
+  };
 
   const addMovie = async () => {
       try {
@@ -59,7 +86,7 @@ const options = [
           body: JSON.stringify(body) 
         });
 
-        setRefreshFlag(!true);
+        setRefreshFlag(refreshFlag+1);
 
       } catch (error) {
           console.error(error.message);
@@ -74,6 +101,18 @@ const options = [
     }
 
     useEffect(()=>{
+        const fetchData = async () => {
+            try {
+              const movies = await getTopMovies();
+              setTopMovies(movies);
+              const popularMovies = await getTopViewsMovies();
+              setTopViewsMovies(popularMovies);
+            } catch (error) {
+              console.error('Error fetching movies:', error);
+            }
+          };
+          console.log("idk")
+          fetchData();
     },[movie]);
     
      
@@ -173,30 +212,40 @@ const options = [
     </header>
     <main>
         <div className="topFilm-section">
-            <div className="popular-section">
+            <div className="popular-section">           
+                <div className="module-border-wrap"><div className="module">
+                    <h3 className="popular-header-name">Top rated this month</h3>
+                    <p>Month June</p>
+                </div></div>
+                {topMovies.map((movie, index) => (
+                    <div className="popular-film" key={index}>
+                    <img src={movie.imageurl} alt="" />                
+                    <div className="film-info"> 
+                        <div className={`rank ${index === 0 ? 'first' : index === 1 ? 'second' : index === 2 ? 'third' : 'other'}`} key={movie.id}>
+                            {index + 1}
+                        </div>
+                    </div>  
+                </div>            
+                ))}
+            </div>
+        </div>
+
+        <div className="topFilm-section">
+            <div className="popular-section">        
                 <div className="module-border-wrap"><div className="module">
                     <h3 className="popular-header-name">Most popular this month</h3>
                     <p>Month June</p>
                 </div></div>
-
-                <div className="popular-film">
-                    <img src="https://static.wikia.nocookie.net/the-martian/images/5/52/The_Martian_poster_3.jpg" alt="" />                
+                {topViewsMovies.map((movie, index) => (
+                    <div className="popular-film" key={index}>
+                    <img src={movie.imageurl} alt="" />                
                     <div className="film-info"> 
-                        <div className="rank first">1</div>
+                        <div className={`rank ${index === 0 ? 'first' : index === 1 ? 'second' : index === 2 ? 'third' : 'other'}`} key={movie.id}>
+                            {index + 1}
+                        </div>
                     </div>  
-                </div>
-                <div className="popular-film">
-                    <img src="https://wallpapercave.com/wp/wp8213746.jpg" alt="" />  
-                    <div className="film-info">          
-                        <div className="rank second">2</div>
-                    </div>  
-                </div>
-                <div className="popular-film">
-                    <img src="https://www.dcplanet.fr/wp-content/uploads/2016/08/Suicide_Squad_Poster.jpg" alt="" /> 
-                    <div className="film-info">             
-                        <div className="rank third">3</div>
-                    </div>  
-                </div>
+                </div>            
+                ))}
             </div>
         </div>
         <div className="flex-container">
